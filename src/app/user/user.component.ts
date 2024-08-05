@@ -43,8 +43,9 @@ selectUser(){
     @Output() select = new EventEmitter();
     @Output() selectedToo = new EventEmitter();
     rand_count = (Math.floor(Math.random()* DUMMY_USERS.length*100)).toString();
+    
     get imagePath() {
-      return 'assets/users/' + this.user.avatar;
+      return 'assets/users/' + this.user?.avatar;
     }
   
     onSelectUser() {
