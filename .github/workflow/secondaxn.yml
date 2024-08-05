@@ -1,0 +1,14 @@
+name: 2ndaxn
+on: push
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hi
+        run: |
+          echo "Hello"
+          echo "World"
+      - name: Say bye
+        run: echo "Audweidersehen"
+      - name: checkout
+        uses: actions/checkout@v4
