@@ -12,6 +12,13 @@
       </li>
     }
   </ul>
+  <UL>
+    @for (nummer of ace; track $index) {
+      <li>
+        <h2>nummer</h2>
+      </li>
+    }
+  </UL>
 
   @if (selectedUser) {
     <app-tasks [randomcount]="randCount" [userId]="selectedUser.id" [name]="selectedUser.name" />

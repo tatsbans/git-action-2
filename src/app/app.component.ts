@@ -17,7 +17,7 @@ export class AppComponent {
   users = DUMMY_USERS;
   selectedUserId?: string;
   randCount!:string;
-
+  ace:Number[] = [1,2,3,4,5]
   get selectedUser() {
     return this.users.find((user) => user.id === this.selectedUserId);
   }
