@@ -4,9 +4,9 @@ on:
  #   branches: ["main"]
   workflow_dispatch:
   pull_request:
-    types:
-      - opened
+    types: [opened, closed]
     branches: ["main"]
+
 jobs:
   Testing:
     runs-on: ubuntu-latest
@@ -33,6 +33,7 @@ jobs:
       # {6}
   Deploy:
     needs: [Testing]
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Say hi
