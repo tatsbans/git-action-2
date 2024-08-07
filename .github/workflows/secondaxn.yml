@@ -55,4 +55,4 @@ jobs:
       - name: Deploying
         run: echo deploying...
       - name: expressing
-        run: echo "{{ toJSON(github)}}"
+        run: echo "${{ toJSON(github)}}"
