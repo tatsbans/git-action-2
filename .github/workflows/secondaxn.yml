@@ -54,3 +54,5 @@ jobs:
         run: npm run build
       - name: Deploying
         run: echo deploying...
+      - name: expressing
+        run: echo "{{ toJSON(github)}}"
