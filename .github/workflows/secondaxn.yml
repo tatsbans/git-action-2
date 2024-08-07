@@ -6,6 +6,7 @@ on:
   pull_request:
     types:
       - opened
+      - closed
     branches: ["main"]
 jobs:
   Testing:
@@ -33,6 +34,7 @@ jobs:
       # {6}
   Deploy:
     needs: [Testing]
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Say hi
