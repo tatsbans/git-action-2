@@ -4,10 +4,9 @@ on:
  #   branches: ["main"]
   workflow_dispatch:
   pull_request:
-    types:
-      - opened
-      - closed
+    types: [opened, closed]
     branches: ["main"]
+
 jobs:
   Testing:
     runs-on: ubuntu-latest
