@@ -1,12 +1,13 @@
 name: 2ndaxn
 on: 
- # push:
- #   branches: ["main"]
   workflow_dispatch:
   pull_request:
-    types: [opened, closed]
+    types: [opened, closed] # when PR
+    branches: ["main"] # pull request targets main
+  push:
     branches: ["main"]
-
+    paths-ignore:
+      - '.github/worklfows/**'
 jobs:
   Testing:
     runs-on: ubuntu-latest
