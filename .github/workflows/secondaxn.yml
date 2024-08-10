@@ -85,6 +85,6 @@ jobs:
       - name: Deploying
         run: ls
       - name: output filename
-        run: echo {{needs.Building.outputs.script-file}}
+        run: echo "${{needs.Building.outputs.script-file}}""
       #- name: expressing
       #  run: echo "${{ toJSON(github)}}"
