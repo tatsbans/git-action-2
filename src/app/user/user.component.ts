@@ -1,8 +1,8 @@
-import { Component, computed, EventEmitter, input, Input, Output, signal,output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, /*signal,output*/ } from '@angular/core';
 
 import { DUMMY_USERS } from '../dummy-users'
 
-const rand_count = Math.floor(Math.random()* DUMMY_USERS.length)
+//const rand_count = Math.floor(Math.random()* DUMMY_USERS.length)
 
 
 @Component({
@@ -40,7 +40,7 @@ selectUser(){
   }*/
 
     @Input({ required: true }) user!: User;
-    @Output() select = new EventEmitter();
+    @Output() selected = new EventEmitter();
     @Output() selectedToo = new EventEmitter();
     rand_count = (Math.floor(Math.random()* DUMMY_USERS.length*100)).toString();
     
@@ -49,7 +49,7 @@ selectUser(){
     }
   
     onSelectUser() {
-      this.select.emit(this.user.id);
+      this.selected.emit(this.user.id);
       this.selectedToo.emit(this.rand_count);
     }
 
