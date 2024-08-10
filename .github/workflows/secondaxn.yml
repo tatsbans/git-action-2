@@ -66,6 +66,7 @@ jobs:
       # {6}
 
   Deploy:
+
     needs: [Building]
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
