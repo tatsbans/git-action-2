@@ -58,7 +58,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
             name: dist-files
-            path: dist/first-proj
+            path:  /home/runner/work/git-action-2/git-action-2/dist/firstproj
+      - name: Build path
+        run: ls
+      - name: Build pwd
+        run: pwd
       # {6}
 
   Deploy:
