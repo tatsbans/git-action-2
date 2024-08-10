@@ -75,7 +75,7 @@ jobs:
       - name: print js file
         run: |
               echo "${{steps.copypathid.outputs.script-files}}"
-              echp "${{steps.BildLsId.outputs.testop}}"
+              echo "${{steps.BildLsId.outputs.testop}}"
       # {6}
 
   Deploy:
