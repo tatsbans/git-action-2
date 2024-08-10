@@ -52,7 +52,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       # {5}
-      - name: Run build
+      - name: Build
+        run: npm run build
+      - name: upload artifactory
         uses: actions/upload-artifact@v4
         with:
             name: dist-files
