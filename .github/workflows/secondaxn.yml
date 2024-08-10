@@ -66,8 +66,9 @@ jobs:
       # {6}
 
   Deploy:
-    #needs: [Testing,Building]
-    #if: github.event.pull_request.merged == true
+
+    needs: [Building]
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Say hi
