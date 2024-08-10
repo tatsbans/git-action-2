@@ -8,7 +8,7 @@
   <ul id="users">
     @for (user of users; track user.id) {
       <li>
-        <app-user [user]="user" (selectedToo)="onRandSelected($event)" (select)="onUserSelected($event)" />
+        <app-user [user]="user" (selectedToo)="onRandSelected($event)" (selected)="onUserSelected($event)" />
       </li>
     }
   </ul>
