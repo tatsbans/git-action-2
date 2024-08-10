@@ -34,6 +34,8 @@ jobs:
   Building:
     needs: [Testing]
     runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{steps.copypathid.outputs.script-files}}
     steps:
       - name: Say hi
         run: |
@@ -63,6 +65,9 @@ jobs:
         run: ls
       - name: Build pwd
         run: pwd
+      - name: copypath
+        id: copypathid
+        run: find ./dist/  -name "main*.js" -type f -execdir echo 'script-files={}' >> $GITHUB_OUTPUT ';'
       # {6}
 
   Deploy:
@@ -78,5 +83,7 @@ jobs:
         run: echo "Audweidersehen"
       - name: Deploying
         run: ls
+      - name: output filename
+        run: echo {{needs.Building.outputs.script-file}}
       #- name: expressing
       #  run: echo "${{ toJSON(github)}}"
