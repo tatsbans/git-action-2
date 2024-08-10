@@ -71,24 +71,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Say hi
-        run: |
-          echo "Hello"
-          echo "World"
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
       - name: Say bye
         run: echo "Audweidersehen"
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: Setup Node.js 
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
       - name: Deploying
-        run: echo deploying...
-      - name: expressing
-        run: echo "${{ toJSON(github)}}"
+        run: ls
+      #- name: expressing
+      #  run: echo "${{ toJSON(github)}}"
