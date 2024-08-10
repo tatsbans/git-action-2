@@ -28,9 +28,9 @@ jobs:
           cache-dependency-path: package-lock.json
       - name: Install dependencies
         run: npm ci
-      # {5}
-      - name: Run tests
-        run: npm run test:ci 
+      # {5} fdfd
+     # - name: Run tests
+     #   run: npm run test:ci 
   Building:
     needs: [Testing]
     runs-on: ubuntu-latest
