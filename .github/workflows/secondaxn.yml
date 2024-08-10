@@ -5,7 +5,7 @@ on:
     types: [opened, closed] # when PR
     branches: ["main"] # pull request targets main   ok
  # push:
-  #  branches: ["main"] # when PR is merged to main this is also triggered
+  #  branches: ["main"] # when PR is merged to main this is also triggered n
   #  paths-ignore:
   #    - '.github/worklfows/**'
 jobs:
