@@ -9,6 +9,30 @@ on:
   #  paths-ignore:
   #    - '.github/worklfows/**'
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+ 
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+      - name: cache dependency
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: dpes-node-modules-${{hashFiles('**/package-lock.json')}}
+
+      - name: Install dependencies
+        run: npm ci
+      # {5} fdfd
+      - name: Run lint 
+        run: npm run lint
+       
   Testing:
     runs-on: ubuntu-latest
     steps:
@@ -119,3 +143,11 @@ jobs:
               echo "${{needs.Building.outputs.script-file}}"
       #- name: expressing
       #  run: echo "${{ toJSON(github)}}"
+
+  Report:
+    needs: [Building,lint]
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say bye
+        run: echo ${{ github }}
