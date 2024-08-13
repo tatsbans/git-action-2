@@ -36,12 +36,14 @@ jobs:
         run: npm ci
       # {5} fdfd
       - name: Run tests
+        id: testrunner
         run: npm run test:ci
       - name: Build path
         run: ls
       - name: Build pwd
         run: pwd 
       - name: upload artifactory
+        if: always() && steps.testrunner.outcome != 'failure'
         uses: actions/upload-artifact@v4
         with:
             name: dist-files
