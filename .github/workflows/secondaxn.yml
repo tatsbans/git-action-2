@@ -43,7 +43,7 @@ jobs:
       - name: Build pwd
         run: pwd 
       - name: upload artifactory
-        if: always() && steps.testrunner.outcome != 'failure'
+        if: always() && steps.testrunner.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
             name: dist-files
