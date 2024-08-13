@@ -41,6 +41,12 @@ jobs:
         run: ls
       - name: Build pwd
         run: pwd 
+      - name: upload artifactory
+        uses: actions/upload-artifact@v4
+        with:
+            name: dist-files
+            path:  ./coverage/firstproj
+
   Building:
     needs: [Testing]
     runs-on: ubuntu-latest
