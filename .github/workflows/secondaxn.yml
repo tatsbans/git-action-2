@@ -32,11 +32,15 @@ jobs:
           path: ~/.npm
           key: dpes-node-modules-${{hashFiles('**/package-lock.json')}}
 
-      #- name: Install dependencies
-      #  run: npm ci
+      - name: Install dependencies
+        run: npm ci
       # {5} fdfd
-     # - name: Run tests
-     #   run: npm run test:ci 
+      - name: Run tests
+        run: npm run test:ci
+      - name: Build path
+        run: ls
+      - name: Build pwd
+        run: pwd 
   Building:
     needs: [Testing]
     runs-on: ubuntu-latest
