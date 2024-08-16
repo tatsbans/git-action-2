@@ -15,8 +15,9 @@ non Signal format
 -->
 
 <div>
-    <button (click)="onSelectUser()">
+    <button [class.active]="user_selected" (click)="onSelectUser()">
       <img [src]="imagePath" [alt]="user.name" />
       <span>{{ user.name }}</span>
     </button>
   </div>
+

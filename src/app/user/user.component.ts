@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, /*signal,output*/ } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal,output, input } from '@angular/core';
 
 import { DUMMY_USERS } from '../dummy-users'
+import { NewUserComponent } from "../new-user/new-user.component";
 
 //const rand_count = Math.floor(Math.random()* DUMMY_USERS.length)
 
@@ -8,7 +9,7 @@ import { DUMMY_USERS } from '../dummy-users'
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [NewUserComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -43,7 +44,8 @@ selectUser(){
     @Output() selected = new EventEmitter();
     @Output() selectedToo = new EventEmitter();
     rand_count = (Math.floor(Math.random()* DUMMY_USERS.length*100)).toString();
-    
+    user_selected = true;
+  
     get imagePath() {
       return 'assets/users/' + this.user?.avatar;
     }
@@ -51,12 +53,19 @@ selectUser(){
     onSelectUser() {
       this.selected.emit(this.user.id);
       this.selectedToo.emit(this.rand_count);
+      let newUser = new User("","","")
+      DUMMY_USERS.push(newUser);
     }
 
 
 }
-export interface User {
+export class User {
   id: string;
   avatar: string;
   name: string;
+  constructor( id: string ,avatar: string , name: string ){
+    this.avatar=avatar;
+    this.name=name;
+    this.id=id;
+  }
 }
