@@ -9,6 +9,31 @@ on:
   #  paths-ignore:
   #    - '.github/worklfows/**'
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+ 
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+      - name: cache dependency
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules 
+          key: dpes-node-modules-${{hashFiles('**/package-lock.json')}}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit!='true'
+        run: npm ci
+      # {5} fdfd
+      - name: Run lint 
+        run: npm run lint
+       
   Testing:
     runs-on: ubuntu-latest
     steps:
@@ -27,12 +52,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - name: cache dependency
+        id: cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
-          key: dpes-node-modules-${{hashFiles('**/package-lock.json')}}
-
+            path: node_modules  
+            key: dpes-node-modules-${{hashFiles('**/package-lock.json')}}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit!='true'
         run: npm ci
       # {5} fdfd
       - name: Run tests
@@ -43,7 +69,7 @@ jobs:
       - name: Build pwd
         run: pwd 
       - name: upload artifactory
-        if: always() && steps.testrunner.outcome != 'failure'
+        if: always() && steps.testrunner.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
             name: dist-files
@@ -71,11 +97,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - name: cache dependency
+        id: cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
+          path: node_modules #~/.npm
           key: dpes-node-modules-${{hashFiles('**/package-lock.json')}}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit!='true'
         run: npm ci
       # {5}
       - name: Build
@@ -120,3 +148,11 @@ jobs:
               echo "${{needs.Building.outputs.script-file}}"
       #- name: expressing
       #  run: echo "${{ toJSON(github)}}"
+
+  Report:
+    needs: [Building,lint]
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say bye
+        run: echo ${{ github }}

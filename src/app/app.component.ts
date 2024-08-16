@@ -15,15 +15,18 @@ import { TasksComponent } from "./tasks/tasks.component";
 export class AppComponent {
   title = 'firstproj';
   users = DUMMY_USERS;
-  selectedUserId?: string;
+  selectedUserId?: string; // বলছে যে হয়তো value  নাও আসতে  পারে  সেই  ক্ষেত্রে fallback সেকশন থাকবে, html  ফাইল-এ 
   randCount!:string;
   ace:number[] = [1,2,3,4,5]
   get selectedUser() {
     return this.users.find((user) => user.id === this.selectedUserId);
+
   }
+  
 
   onUserSelected(id: string) {
     this.selectedUserId = id;
+    this.users.push
   }
 
   onRandSelected(randCount: string) {

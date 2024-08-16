@@ -2,8 +2,10 @@
     <header>
       <h2>{{ name }}'s Tasks for {{randomcount}}</h2>
       <menu>
-        <button>Add Task</button>
+        <button (click)="showNewUser=true" >Add Task</button>
       </menu>
     </header>
-
+    @if(showNewUser){
+    <app-new-user (userAdded)="onUserAdded($event)" (selectedToo)="onCancelClicked($event)"/>
+    }
   </section>
