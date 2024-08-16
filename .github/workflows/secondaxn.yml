@@ -22,12 +22,14 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - name: cache dependency
+        id: cache
         uses: actions/cache@v4
         with:
-          path: ~/.npm
+          path: node_modules #~/.npm
           key: dpes-node-modules-${{hashFiles('**/package-lock.json')}}
 
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit!='true'
         run: npm ci
       # {5} fdfd
       - name: Run lint 
