@@ -1,21 +1,19 @@
-
 name: matrixaxn
 on: 
   workflow_dispatch:
-
   push:
 jobs:
   example_matrix:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest]
         node: [14, 16, 20]
         include:
           - os: windows-latest
             node: 16
         exclude:
-          - os: macos-latest
-            version: 16
+          - os: ubuntu-latest
+            version: 14
     runs-on: ${{ matrix.os }}
     continue-on-error: true
     steps:
