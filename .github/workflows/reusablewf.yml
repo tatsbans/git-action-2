@@ -6,4 +6,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Say bye
-            run: echo ${{ github }}
+            run: echo "I am here"
