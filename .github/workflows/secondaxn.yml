@@ -9,6 +9,10 @@ on:
   #  paths-ignore:
   #    - '.github/worklfows/**'
 jobs:
+  prerun:
+    uses: ./.github/workflows/reusablewf.yml
+
+
   lint:
     runs-on: ubuntu-latest
     steps:

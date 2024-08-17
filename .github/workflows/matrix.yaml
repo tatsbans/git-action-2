@@ -1,0 +1,29 @@
+
+name: matrixaxn
+on: 
+  workflow_dispatch:
+
+  push:
+jobs:
+  example_matrix:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        node: [14, 16, 20]
+        include:
+          - os: windows-latest
+            node: 16
+        exclude:
+          - os: macos-latest
+            version: 12
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node}}
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
