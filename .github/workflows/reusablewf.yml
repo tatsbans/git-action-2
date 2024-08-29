@@ -1,9 +1,14 @@
 name: recurrDepl
 on: 
   workflow_call:
+    inputs:
+      artifact-namen:
+        description: The name forartifact
+        type: string
+        default: valz
 jobs:
     deploying:
         runs-on: ubuntu-latest
         steps:
           - name: Say bye
-            run: echo "I am here"
+            run: ${{ inputs.artifact-namen }}

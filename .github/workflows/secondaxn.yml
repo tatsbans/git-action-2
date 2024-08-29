@@ -38,7 +38,9 @@ jobs:
         run: npm run lint
   prerun: # Nameof Job 
     needs: [lint]
-    uses: ./.github/workflows/reusablewf.yml     
+    uses: ./.github/workflows/reusablewf.yml  
+    with:
+      artifact-namen: dist-file   
   Testing:
     runs-on: ubuntu-latest
     steps:
