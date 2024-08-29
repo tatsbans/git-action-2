@@ -9,8 +9,7 @@ on:
   #  paths-ignore:
   #    - '.github/worklfows/**'
 jobs:
-  prerun:
-    uses: ./.github/workflows/reusablewf.yml
+
 
 
   lint:
@@ -37,7 +36,9 @@ jobs:
       # {5} fdfd
       - name: Run lint 
         run: npm run lint
-       
+  prerun: # Nameof Job 
+    needs: [lint]
+    uses: ./.github/workflows/reusablewf.yml     
   Testing:
     runs-on: ubuntu-latest
     steps:
@@ -148,7 +149,7 @@ jobs:
         run: ls
       - name: output filename
         run: |
-              echo "${{needs.Building.outputs.script-file}}"
+              echo "${{needs.Building.outputs.script-file}}" #output from another job and step in that job.
       #- name: expressing
       #  run: echo "${{ toJSON(github)}}"
 
