@@ -11,4 +11,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Say bye
-            run: ${{ inputs.artifact-namen }}
+            run: echo ${{ inputs.artifact-namen }}
