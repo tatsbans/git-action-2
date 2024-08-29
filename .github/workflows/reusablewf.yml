@@ -6,9 +6,15 @@ on:
         description: The name forartifact
         type: string
         default: valz
+        required: true
+    secrets:
+      secretnamen:
+        required: false
 jobs:
     deploying:
         runs-on: ubuntu-latest
         steps:
           - name: Say bye
             run: echo ${{ inputs.artifact-namen }}
+          - name: secret name printing
+            run: echo ${{ secrets.secretname}}

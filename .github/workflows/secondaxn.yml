@@ -41,6 +41,8 @@ jobs:
     uses: ./.github/workflows/reusablewf.yml  
     with:
       artifact-namen: dist-file   
+    secrets:
+      secretnamen: ${{ secrets.ASECRET }}
   Testing:
     runs-on: ubuntu-latest
     steps:
