@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, signal,output, input } from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 
 import { DUMMY_USERS } from '../dummy-users'
 import { NewUserComponent } from "../new-user/new-user.component";
@@ -53,7 +53,7 @@ selectUser(){
     onSelectUser() {
       this.selected.emit(this.user.id);
       this.selectedToo.emit(this.rand_count);
-      let newUser = new User("","","")
+      const newUser = new User("","","")
       DUMMY_USERS.push(newUser);
     }
 

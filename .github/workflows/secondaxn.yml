@@ -3,14 +3,20 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, closed] # when PR
-    branches: ["main"] # pull request targets main   ok
- # push:
-  #  branches: ["main"] # when PR is merged to main this is also triggered n
+
+    branches: ["main"] # pull request targets main
+  push:
+  #  branches: ["main"] # when PR is merged to main this is also triggered
+
   #  paths-ignore:
   #    - '.github/worklfows/**'
 jobs:
+
+
+
   lint:
     runs-on: ubuntu-latest
+    environment: 'stage'
     steps:
  
       - name: checkout
@@ -33,16 +39,23 @@ jobs:
       # {5} fdfd
       - name: Run lint 
         run: npm run lint
-       
+  prerun: # Nameof Job 
+    needs: [lint]
+    uses: ./.github/workflows/reusablewf.yml  
+    with:
+      artifact-namen: dist-file   
+    secrets:
+      secretnamen: ${{ secrets.ASECRET }}
   Testing:
+    needs: [prerun]
     runs-on: ubuntu-latest
     steps:
       - name: Say hi
         run: |
           echo "Hello"
           echo "World"
-      - name: Say bye
-        run: echo "Audweidersehen"
+      - name: Say output
+        run: echo ${{needs.prerun.outputs.result}}
       - name: checkout
         uses: actions/checkout@v4
       - name: Setup Node.js 
@@ -126,7 +139,7 @@ jobs:
       - name: print js file
         run: |
               echo "${{steps.copypathid.outputs.script-files}}"
-              echo "${{steps.BildLsId.outputs.testop}}"
+              echo "${{ steps.BildLsId.outputs.testop}}"
       # {6}
 
   Deploy:
@@ -145,7 +158,7 @@ jobs:
         run: ls
       - name: output filename
         run: |
-              echo "${{needs.Building.outputs.script-file}}"
+              echo "${{needs.Building.outputs.script-file}}" #output from another job and step in that job.
       #- name: expressing
       #  run: echo "${{ toJSON(github)}}"
 

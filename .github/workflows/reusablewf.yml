@@ -1,0 +1,31 @@
+name: recurrDepl
+on: 
+  workflow_call:
+    inputs:
+      artifact-namen:
+        description: The name forartifact
+        type: string
+        default: valz
+        required: true
+    secrets:
+      secretnamen:
+        required: false
+    outputs:
+      result:
+        description: an output
+        value: ${{jobs.deploying.outputs.outputinfo}}
+
+    
+jobs:
+    deploying:
+        outputs:
+          outputinfo: ${{steps.setoutput.outputs.step-result}}
+        runs-on: ubuntu-latest
+        steps:
+          - name: Say bye
+            run: echo ${{ inputs.artifact-namen }}
+          - name: secret name printing
+            run: echo ${{ secrets.secretname}}
+          - name: generate output
+            id: setoutput
+            run: echo "step-result=success" >> $GITHUB_OUTPUT

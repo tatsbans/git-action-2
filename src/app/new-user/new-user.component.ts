@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, output, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { DatePipe} from '@angular/common'
 import{FormsModule} from '@angular/forms'
 
@@ -19,7 +19,6 @@ export class NewUserComponent {
   hideLabel=true;
   selectedToo = output<boolean>();
   userAdded =output<User>();
-  //@Output() selectedToo = new EventEmitter();
   onCancelClick(){
     this.hideLabel=true;
     this.selectedToo.emit(this.hideLabel);

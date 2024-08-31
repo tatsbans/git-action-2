@@ -20,7 +20,8 @@ onUserAdded( newUser: User) {
   showNewUser = false;
 
   onCancelClicked(hideForm:boolean){
-    this.showNewUser=false;
+    if(hideForm)
+     this.showNewUser=false;
   }
   
 
